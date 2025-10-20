@@ -1,6 +1,6 @@
 import { TriangleUpIcon } from "@radix-ui/react-icons";
 
-interface feedbackItem {
+type feedbackItem = {
   upvoteCount: number;
   badgeLetter: string;
   companyName: string;
@@ -8,9 +8,15 @@ interface feedbackItem {
   daysAgo: number;
 }
 
+type FeedbackItemProps = {
+  
+  feedbackItem: feedbackItem
+
+};
 
 
-export default function FeedbackItem({ feedbackItem }) {
+
+export default function FeedbackItem({ feedbackItem }: FeedbackItemProps) {
   return (
          <li className="feedback">
         
