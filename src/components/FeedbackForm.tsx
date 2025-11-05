@@ -1,9 +1,11 @@
 import { useState } from "react"
 import { MAX_CHARS } from "../lib/constants";
 
+type FeedbackFormProps = {
+  onAddToList: (text:string) => void;
+}
 
-
-export default function FeedbackForm() {
+export default function FeedbackForm({onAddToList}:FeedbackFormProps) {
 
   const [text, setText] = useState("");
   
@@ -20,9 +22,14 @@ export default function FeedbackForm() {
 
 }
 
+const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onAddToList(text);
+    setText("");
+}
 
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleOnSubmit}>
       <textarea value={text} onChange={handleOnChange} id="feedback-textarea" placeholder="" spellCheck={false}/>
       <label htmlFor="feedback-textarea">
         Enter your feedback here, remember to #hashtag the company
