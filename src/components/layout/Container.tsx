@@ -1,6 +1,7 @@
-import FeedbackList from "./FeedbackList";
+import { TfeedbackItem } from "../../lib/types";
+import FeedbackList from "../feedback/FeedbackList";
 import Header from "./Header";
-import { TfeedbackItem } from "../lib/types";
+
 
 type ContainerProps = {
   feedbackItems: TfeedbackItem[];

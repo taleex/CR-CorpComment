@@ -1,7 +1,7 @@
 import FeedbackItem from "./FeedbackItem";
-import Spinner from "./Spinner";
-import ErrorMessage from "./ErrorMessage";
-import { TfeedbackItem } from "../lib/types";
+import Spinner from "../Spinner";
+import ErrorMessage from "../ErrorMessage";
+import { TfeedbackItem } from "../../lib/types";
 
 type FeedbackListProps = {
   feedbackItems: TfeedbackItem[]  ;
