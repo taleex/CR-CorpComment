@@ -8,8 +8,11 @@ type FeedbackFormProps = {
 export default function FeedbackForm({onAddToList}:FeedbackFormProps) {
 
   const [text, setText] = useState("");
-  
   const charCount = MAX_CHARS - text.length;
+  const [ showValidIndicator, setShowValidIndicator] = useState(false);
+  const [ showInvalidIndicator, setShowInvalidIndicator] = useState(false);
+  
+
 
   const handleOnChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 
@@ -24,12 +27,22 @@ export default function FeedbackForm({onAddToList}:FeedbackFormProps) {
 
 const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (text.includes('#') && text.length >= 5) {
+      setShowValidIndicator(true);
+      setTimeout(() => setShowValidIndicator(false), 2000);
+    } else {
+       setShowInvalidIndicator(true);
+        setTimeout(() => setShowInvalidIndicator(false), 2000);
+       return;
+    }
+
     onAddToList(text);
     setText("");
 }
 
   return (
-    <form className="form" onSubmit={handleOnSubmit}>
+    <form className={`form ${showValidIndicator ? 'form--valid' :''} } ${showInvalidIndicator ? 'form--invalid' :''}`} onSubmit={handleOnSubmit}>
       <textarea value={text} onChange={handleOnChange} id="feedback-textarea" placeholder="" spellCheck={false}/>
       <label htmlFor="feedback-textarea">
         Enter your feedback here, remember to #hashtag the company

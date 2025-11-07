@@ -4,7 +4,6 @@ import { TfeedbackItem } from "../lib/types";
 import HastagList from "./hashtag/HastagList"
 import Footer from "./layout/Footer";
 import Container from "./layout/Container";
-import FeedbackItem from "./feedback/FeedbackItem";
 
 
 function App() {

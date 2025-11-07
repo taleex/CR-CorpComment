@@ -11,8 +11,6 @@ export default function HastagList({companyList, handleSelectCompany}: HashtagLi
       {companyList.map((company) => 
          (<HashtagItem onSelectCompany={handleSelectCompany} company={company} />)
       )}
-      
-      
       </ul>
   )
 }
