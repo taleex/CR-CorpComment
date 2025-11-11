@@ -1,20 +1,12 @@
-import { TfeedbackItem } from "../../lib/types";
 import FeedbackList from "../feedback/FeedbackList";
 import Header from "./Header";
 
 
-type ContainerProps = {
-  feedbackItems: TfeedbackItem[];
-  isLoading: boolean;
-  errorMessage: string;
-  handleAddToList: (text:string) => void;
-}
-
-export default function Container({feedbackItems, isLoading, errorMessage, handleAddToList}: ContainerProps) {
+export default function Container() {
   return (
     <main className="container">
-        <Header handleAddToList={handleAddToList}/>
-        <FeedbackList isLoading={isLoading} errorMessage={errorMessage} feedbackItems={feedbackItems}/>
+        <Header />
+        <FeedbackList />
     </main>
   )
 }
