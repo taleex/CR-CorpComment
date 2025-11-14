@@ -1,5 +1,6 @@
-import { createContext, useEffect, useMemo, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 import { TfeedbackItem } from "../lib/types";
+import { useFeedbackItems } from "../lib/hooks";
 
 type FeedbackItemsContextProviderProps = { 
     children: React.ReactNode;
@@ -18,9 +19,12 @@ export const FeedbackItemsContext = createContext<TFeedbackItemsContext | null>(
 
 export default function FeedbackItemsContextProvider({ children }: FeedbackItemsContextProviderProps) {
 
-    const [feedbackItems, setfeedbackItems] = useState<TfeedbackItem[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
+ const {
+    feedbackItems,
+    isLoading,
+    errorMessage
+  } = useFeedbackItems();
+
     const [selectedCompany, setSelectedCompany] = useState<string | null>("");
 
 
@@ -64,31 +68,6 @@ export default function FeedbackItemsContextProvider({ children }: FeedbackItems
           setSelectedCompany(company);
       };
 
-    useEffect( () => {
-      const fetchFeedbacksItems = async () => {
-        setIsLoading(true);
-  
-        try{
-         const response = await fetch('https://bytegrad.com/course-assets/projects/corpcomment/api/feedbacks');
-  
-        if (!response.ok) {
-          throw new Error();
-        }
-      
-        const data = await response.json();
-        setfeedbackItems(data.feedbacks); 
-      }catch (error) {
-        setErrorMessage("Failed to load feedbacks. Please try again later.");
-      }
-      
-        setIsLoading(false);
-          };
-      
-        fetchFeedbacksItems();
-      
-        }, []
-      );
-  
 
     return (<FeedbackItemsContext.Provider value={{
         filteredFeedbackItems,
